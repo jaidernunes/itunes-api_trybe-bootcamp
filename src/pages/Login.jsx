@@ -35,7 +35,6 @@ export default class Login extends React.Component {
     const { state } = this;
     const minCharName = 3;
     const isButtonDisabled = state.nameInput.length < minCharName;
-    console.log(state.nameInput);
 
     return (
 
