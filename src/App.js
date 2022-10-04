@@ -9,11 +9,21 @@ import ProfileEdit from './pages/ProfileEdit';
 import Search from './pages/Search';
 
 class App extends React.Component {
+  // handleChange({ target }) {
+  //   const { name } = target;
+  //   const value = target.type === 'checkbox' ? target.checked : target.value;
+
+  //   this.setState({
+  //     [name]: value,
+  //   });
+  // }
+
   render() {
     return (
       <>
         <p>TrybeTunes</p>
         <BrowserRouter>
+          {/* <Switch> */}
           <Route path="/" component={ Login } />
           <Route path="/search" component={ Search } />
           <Route path="/album/:id" component={ Album } />
@@ -21,6 +31,7 @@ class App extends React.Component {
           <Route path="/profile" component={ Profile } />
           <Route path="/profile/edit" component={ ProfileEdit } />
           <Route path="*" component={ NotFound } />
+          {/* </Switch> */}
         </BrowserRouter>
       </>
     );
