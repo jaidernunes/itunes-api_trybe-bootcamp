@@ -6,7 +6,6 @@ export default class Loading extends React.Component {
       <div id="loading">
         <h2>Carregando...</h2>
       </div>
-
     );
   }
 }
