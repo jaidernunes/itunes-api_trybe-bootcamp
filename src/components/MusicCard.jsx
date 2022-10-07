@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { addSong, getFavoriteSongs } from '../services/favoriteSongsAPI';
+import { addSong, getFavoriteSongs, removeSong } from '../services/favoriteSongsAPI';
 import Loading from './Loading';
 
 export default class MusicCard extends React.Component {
@@ -14,8 +14,8 @@ export default class MusicCard extends React.Component {
     this.setState({
       loading: true,
     });
+    // console.log(gotFavorites);
     const gotFavorites = await getFavoriteSongs();
-    console.log(gotFavorites);
     this.setState({
       gotFavorites,
       loading: false,
@@ -26,18 +26,32 @@ export default class MusicCard extends React.Component {
     const { trackName, previewUrl, key, trackId, trackObj } = this.props;
     const { loading, gotFavorites } = this.state;
 
-    const handleCheck = async () => {
+    const handleCheck = async ({ target }) => {
       // const { id } = target; --- { target }
       // const value = target.type === 'checkbox' ? target.checked : target.value;
 
       this.setState(() => ({
         loading: true,
-        gotFavorites: [...gotFavorites, trackObj],
-        // amIFavorite: !prevState.amIFavorite,
       }));
 
-      await addSong(trackObj);
+      console.log(target);
+      console.log(target.checked);
+
+      if (target.checked) {
+        await addSong(trackObj);
+      } else {
+        await removeSong(trackObj);
+      }
+      // if (target.checked === false) {
+      //   await removeSong(trackObj);
+      // } else {
+      //   await addSong(trackObj);
+      // }
+
+      const updateFavorites = await getFavoriteSongs();
+      console.log(updateFavorites);
       this.setState({
+        gotFavorites: updateFavorites,
         loading: false,
       });
 
